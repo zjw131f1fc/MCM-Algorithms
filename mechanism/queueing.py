@@ -7,6 +7,7 @@
 """
 
 import numpy as np
+import math
 
 
 def mm1(lambda_rate, mu_rate):
@@ -100,12 +101,12 @@ def mmc(lambda_rate, mu_rate, c):
     rho = lambda_rate / (c * mu_rate)
 
     # 计算P0
-    sum_term = sum((lambda_rate / mu_rate)**n / np.math.factorial(n) for n in range(c))
-    last_term = (lambda_rate / mu_rate)**c / (np.math.factorial(c) * (1 - rho))
+    sum_term = sum((lambda_rate / mu_rate)**n / math.factorial(n) for n in range(c))
+    last_term = (lambda_rate / mu_rate)**c / (math.factorial(c) * (1 - rho))
     P0 = 1 / (sum_term + last_term)
 
     # Erlang C公式：需要等待的概率
-    Pw = ((lambda_rate / mu_rate)**c / np.math.factorial(c)) * (1 / (1 - rho)) * P0
+    Pw = ((lambda_rate / mu_rate)**c / math.factorial(c)) * (1 / (1 - rho)) * P0
 
     Lq = Pw * rho / (1 - rho)
     L = Lq + lambda_rate / mu_rate
